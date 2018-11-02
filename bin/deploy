@@ -1,0 +1,20 @@
+#!/bin/bash
+function deploy {
+  ssh deploy@68.183.122.29 '
+      cd ~/gifinity
+      echo --PULLING FROM MASTER--
+      git pull origin master
+      echo --RESTARTING SERVER--
+      touch tmp/restart.txt
+      echo --GOODBYE--
+      exit
+  '
+}
+
+read -r -p "Are you sure? [y/N] " response
+if [[ "$response" =~ ^[Yy]$ ]]
+then
+  deploy
+else
+  exit 1
+fi
