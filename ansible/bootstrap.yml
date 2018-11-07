@@ -2,6 +2,9 @@
 - name: bootstrap
   hosts: all
   become: yes
+  # Uncomment the following line to ssh into a specific user
+  # The user must be a non-root sudo-user
+  # remote-user: <<USERNAME>>
 
   roles:
     - bootstrap
