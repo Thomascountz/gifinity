@@ -1,0 +1,5 @@
+[production]
+204.48.19.176
+
+[production:vars]
+ansible_python_interpreter=/usr/bin/python3

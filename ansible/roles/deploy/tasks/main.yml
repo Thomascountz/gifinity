@@ -1,0 +1,20 @@
+- name: "Retrieve Source Code"
+  git:
+    repo: https://github.com/Thomascountz/gifinity.git
+    dest: /home/deploy/gifinity/
+  notify:
+  - restart nginx
+
+- name: "Install Runtime Dependencies"
+  bundler:
+    chdir: /home/deploy/gifinity/
+    deployment_mode: yes
+  notify:
+  - restart nginx
+
+- name: "Upload dotenv File"
+  copy:
+    src: ../../../../.env
+    dest: /home/deploy/gifinity/.env
+  notify:
+  - restart nginx

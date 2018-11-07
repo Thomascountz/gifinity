@@ -1,0 +1,57 @@
+- name: "Change Root Password"
+  user:
+    name: root
+    password: "{{ ROOT_PASSWORD }}"
+
+- name: "Add Deploy User"
+  user:
+    name: "{{ deploy_username }}"
+    password: "{{ DEPLOY_PASSWORD }}"
+    shell: /bin/bash
+
+- name: "Add Authorized Keys for Deploy User"
+  authorized_key:
+    user: "{{ deploy_username }}"
+    key: "{{ lookup('file', deploy_public_key_file) }}"
+
+- name: "Add Deploy User to Sudoers"
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regex: "{{ deploy_username }} ALL"
+    line: "{{ deploy_username }} ALL=(ALL) NOPASSWD: ALL"
+    validate: "visudo -cf %s"
+
+- name: "Update APT Cache"
+  apt:
+    update_cache: True
+
+- name: "Upgrade APT"
+  apt:
+    upgrade: safe
+
+- name: "Install Required Utilities"
+  apt:
+    pkg:
+      - git
+      - vim
+    state: present
+
+- name: "Disable Password Login"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regex: "PasswordAuthentication"
+    line: "PasswordAuthentication no"
+
+- name: "Disable Root SSH Access"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regex: "^PermitRootLogin"
+    line: "PermitRootLogin no"
+
+- name: "Restart SSH"
+  service:
+    name: sshd
+    state: restarted

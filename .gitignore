@@ -1,2 +1,9 @@
 # Environment variables
 .env
+
+# .swp & .swo
+*.swp
+*.swo
+
+# Ansbile retries
+*.retry
