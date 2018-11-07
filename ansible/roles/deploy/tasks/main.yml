@@ -2,6 +2,8 @@
   git:
     repo: https://github.com/Thomascountz/gifinity.git
     dest: /home/deploy/gifinity/
+  tags: 
+    - update-source-only
   notify:
   - restart nginx
 
@@ -9,6 +11,8 @@
   bundler:
     chdir: /home/deploy/gifinity/
     deployment_mode: yes
+  tags: 
+    - update-source-only
   notify:
   - restart nginx
 
@@ -16,5 +20,7 @@
   copy:
     src: ../../../../.env
     dest: /home/deploy/gifinity/.env
+  tags: 
+    - update-source-only
   notify:
   - restart nginx
