@@ -1,5 +1,8 @@
 sudo: required
-service: 
+
+language: ruby
+
+services: 
   - docker
 
 script: 
