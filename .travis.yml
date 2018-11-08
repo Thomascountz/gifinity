@@ -1,0 +1,10 @@
+sudo: required
+service: 
+  - docker
+
+script: 
+  - docker build -t gifinity .
+  - docker run gifinity
+
+after_script:
+  - docker images
