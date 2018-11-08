@@ -6,8 +6,8 @@ services:
   - docker
 
 script: 
-  - docker build -t gifinity .
-  - docker run gifinity
+  - docker build -t thomascountz/gifinity .
+  - docker run thomascountz/gifinity
 
 after_script:
   - docker images
