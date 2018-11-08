@@ -7,3 +7,6 @@
 
 # Ansbile retries
 *.retry
+
+# tmp dir from Nginx/Passenger
+/tmp/
