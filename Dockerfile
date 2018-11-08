@@ -14,7 +14,7 @@ RUN mkdir /home/app/gifinity
 
 WORKDIR /home/app/gifinity
 
-COPY Gemfile Gemfile.lock .
+COPY Gemfile Gemfile.lock ./
 
 RUN bundle install
 
