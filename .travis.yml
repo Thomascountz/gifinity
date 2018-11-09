@@ -7,7 +7,7 @@ services:
 
 script: 
   - docker build -t thomascountz/gifinity .
-  - docker run thomascountz/gifinity
+  - docker run thomascountz/gifinity /bin/sh -c "bundle exec rspec"
 
 after_script:
   - docker images
