@@ -5,6 +5,13 @@ require './gifinity'
 
 RSpec.describe 'gifinity' do
   include Rack::Test::Methods
+
+  describe 'test' do
+    it 'fails' do
+      expect(true).to be false
+    end
+  end
+
   describe 'GET /random' do
     it 'returns a 200' do
       def app
