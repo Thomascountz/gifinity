@@ -5,9 +5,9 @@ language: ruby
 services: 
   - docker
 
-script: 
+before_install: 
   - docker build -t thomascountz/gifinity .
   - docker run thomascountz/gifinity /bin/sh -c "cd /home/app/gifinity; bundle exec rspec;"
 
-after_script:
-  - docker images
+script:
+  - bundle exec rspec
